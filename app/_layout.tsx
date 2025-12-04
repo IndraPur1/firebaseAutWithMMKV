@@ -1,6 +1,7 @@
 // app/_layout.tsx
-import { Stack } from 'expo-router';
-import { AuthProvider } from '/Users/indramec/ReactNative/login/src/storage/AuthContext';
+// app/_layout.tsx
+import { Stack } from "expo-router";
+import { AuthProvider } from "../src/storage/AuthContext";
 
 export default function RootLayout() {
   return (

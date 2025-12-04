@@ -17,8 +17,8 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { db } from '/Users/indramec/ReactNative/login/src/firebaseConfig';
-import { AuthContext } from '/Users/indramec/ReactNative/login/src/storage/AuthContext';
+import { db } from '../src/firebaseConfig';
+import { AuthContext } from '../src/storage/AuthContext';
 
 type Mahasiswa = {
   id: string;
