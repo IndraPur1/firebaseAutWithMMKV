@@ -1,27 +1,146 @@
-# Welcome to your Expo app 👋
+# Firebase Authentication with MMKV Storage
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Proyek React Native Expo dengan Firebase Authentication dan MMKV untuk penyimpanan credentials yang aman dan performa tinggi.
 
-## Get started
+## Tech Stack
 
-1. Install dependencies
+- **React Native** - Framework untuk mobile app
+- **Expo** (~54.0.23) - Platform untuk development
+- **Firebase** (^12.6.0) - Authentication
+- **MMKV** (^4.0.0) - Fast & secure key-value storage
+- **Expo Router** (~6.0.14) - File-based routing
 
-   ```bash
-   npm install
-   ```
+## Prerequisites
 
-2. Start the app
+Sebelum memulai, pastikan Anda telah menginstall:
 
-   ```bash
-   npx expo start
-   ```
+- [Node.js](https://nodejs.org/) (versi 18 atau lebih tinggi)
+- [Xcode](https://developer.apple.com/xcode/) (untuk iOS development)
+- [Xcode Command Line Tools](https://developer.apple.com/download/more/)
+- [CocoaPods](https://cocoapods.org/) - untuk iOS dependencies
 
-In the output, you'll find options to open the app in a
+## Setup Project
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Setup Firebase
+
+Pastikan file `GoogleService-Info.plist` sudah ada di root project untuk konfigurasi Firebase iOS.
+
+## Menjalankan di iOS Simulator
+
+### Metode 1: Development Build (Recommended)
+
+Metode ini melakukan native build dan memberi Anda kontrol penuh terhadap native modules.
+
+**Langkah 1: Prebuild untuk iOS**
+
+```bash
+npx expo prebuild --platform ios
+```
+
+Command ini akan:
+- Membuat folder `ios/` dengan native code
+- Menginstall CocoaPods dependencies
+- Mengkonfigurasi native modules
+
+**Langkah 2: Jalankan di Simulator**
+
+```bash
+npm run ios
+```
+
+Atau dengan Expo CLI:
+
+```bash
+npx expo run:ios
+```
+
+Aplikasi akan otomatis dibuild dan terbuka di iOS Simulator.
+
+**Tips:**
+- Build pertama kali membutuhkan waktu lebih lama (5-10 menit)
+- Pastikan minimal 1 iOS Simulator sudah terinstall di Xcode
+- Untuk memilih device spesifik: `npx expo run:ios --device`
+
+### Metode 2: Expo Go (Untuk Quick Testing)
+
+Metode ini lebih cepat tapi tidak mendukung semua native modules.
+
+```bash
+npx expo start
+```
+
+Kemudian:
+1. Tekan `i` untuk membuka di iOS Simulator
+2. Atau scan QR code dengan Expo Go app di iPhone fisik
+
+**Catatan:** MMKV dan beberapa native modules mungkin tidak berfungsi di Expo Go.
+
+## Available Scripts
+
+- `npm start` - Start Expo development server
+- `npm run ios` - Run di iOS simulator (development build)
+- `npm run android` - Run di Android emulator
+- `npm run web` - Run di browser
+- `npm run lint` - Lint codebase
+- `npm run reset-project` - Reset project ke blank template
+
+## Project Structure
+
+```
+├── app/                    # Expo Router screens
+│   ├── _layout.tsx        # Root layout
+│   ├── index.tsx          # Home screen
+│   └── modal.tsx          # Modal screen
+├── src/
+│   ├── firebaseConfig.ts  # Firebase configuration
+│   └── storage/
+│       ├── AuthContext.tsx      # Authentication context
+│       ├── mmkvCredentials.ts   # MMKV credentials storage
+│       └── mmkvUser.ts          # MMKV user data storage
+├── components/            # Reusable components
+└── constants/            # App constants & themes
+```
+
+## Troubleshooting
+
+### Build Gagal di iOS
+
+```bash
+# Clear build cache
+cd ios
+rm -rf build/
+pod deintegrate
+pod install
+cd ..
+npx expo run:ios
+```
+
+### Simulator Tidak Terbuka
+
+```bash
+# List available simulators
+xcrun simctl list devices
+
+# Boot specific simulator
+xcrun simctl boot "iPhone 15 Pro"
+
+# Then run
+npm run ios
+```
+
+### Error saat Prebuild
+
+```bash
+# Clean dan rebuild
+rm -rf ios/ android/
+npx expo prebuild --clean
+```
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
