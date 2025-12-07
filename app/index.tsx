@@ -119,7 +119,7 @@ const MahasiswaScreen: React.FC<MahasiswaScreenProps> = ({ userEmail, onLogout }
   const [list, setList] = useState<Mahasiswa[]>([]);
   const [loadingList, setLoadingList] = useState(true);
 
-  // === TUGAS 3: Fetch data mahasiswa (real-time listener) ===
+  // === Fetch data mahasiswa (real-time listener) ===
   useEffect(() => {
     // referensi koleksi "mahasiswa"
     const colRef = collection(db, 'mahasiswa');
@@ -146,7 +146,7 @@ const MahasiswaScreen: React.FC<MahasiswaScreenProps> = ({ userEmail, onLogout }
     return () => unsub();
   }, []);
 
-  // === TUGAS 2: Tambah data mahasiswa ke Firestore ===
+  // === Tambah data mahasiswa ke Firestore ===
   const handleTambah = async () => {
     if (!nim || !nama || !prodi) {
       Alert.alert('Validasi', 'NIM, Nama, dan Prodi wajib diisi.');
